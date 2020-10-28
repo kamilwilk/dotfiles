@@ -1,0 +1,5 @@
+#!/bin/sh
+tmux new-session -A -s dev -c ~/Projects -d -x "$(tput cols)" -y "$(tput lines)" 'nvim'
+tmux split-window -v -p 20 'zsh' 
+tmux -2 attach-session -d
+(tmux display-message -p '#{pane_current_command}' | grep -iq vim && tmux send-keys C-k) || tmux select-pane -U
