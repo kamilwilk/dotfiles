@@ -1,0 +1,134 @@
+[
+  {
+    "context": "AssistantPanel || EmptyPane || SharedScreen || Editor || ProjectPanel || Terminal",
+    "bindings": {
+      "ctrl-h": ["workspace::ActivatePaneInDirection", "Left"],
+      "ctrl-j": ["workspace::ActivatePaneInDirection", "Down"],
+      "ctrl-k": ["workspace::ActivatePaneInDirection", "Up"],
+      "ctrl-l": ["workspace::ActivatePaneInDirection", "Right"],
+      "ctrl-\\": "workspace::ToggleBottomDock", // terminal
+      "cmd-shift-f": "workspace::ToggleZoom" // fullscreen
+    }
+  },
+  {
+    "context": "EmptyPane || ProjectPanel || SharedScreen || vim_mode == normal",
+    "bindings": {
+      "space e": "workspace::ToggleLeftDock", // file explorer
+      "space space": "file_finder::Toggle", // file finder
+      "space ,": "tab_switcher::Toggle", // switch buffer
+      "space a a": "workspace::ToggleRightDock", // ai
+      "space /": "workspace::NewSearch", // search
+      "space g g": [
+        "task::Spawn",
+        {
+          "task_name": "lazygit"
+        }
+      ] // git
+    }
+  },
+  {
+    // (Editor && vim_mode == normal) is necessary so zed doesn't wait for additional keys in insert mode
+    "context": "EmptyPane || SharedScreen || (Editor && vim_mode == normal)",
+    "bindings": {
+      // "space space": "file_finder::Toggle", // file finder
+      "space s": "project_symbols::Toggle",
+      "space d": "diagnostics::Deploy",
+      "space x": "diagnostics::Deploy",
+      "space a f": "workspace::ToggleRightDock",
+      "space c s": "project_symbols::Toggle",
+      "space q": "pane::CloseAllItems",
+      "space `": "pane::AlternateFile",
+      "space b o": "pane::CloseInactiveItems",
+      "space b d": "pane::CloseActiveItem",
+      "[ j": "pane::GoBack",
+      "] j": "pane::GoForward",
+      "-": "pane::RevealInProjectPanel",
+      "g r": "editor::FindAllReferences",
+      "g i": "editor::GoToImplementation",
+      "space c f": "editor::Format",
+      "space u w": "editor::ToggleSoftWrap",
+      "space u h": "editor::ToggleInlayHints",
+      "space g b": "editor::ToggleGitBlame",
+      "space c r": "editor::Rename",
+      "space c a": "editor::ToggleCodeActions",
+      "] d": "editor::GoToDiagnostic",
+      "[ d": "editor::GoToPrevDiagnostic"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && !inline_completion",
+    "bindings": {
+      "ctrl-l": "editor::ShowInlineCompletion"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == insert && inline_completion",
+    "bindings": {
+      "ctrl-j": "editor::NextInlineCompletion",
+      "ctrl-k": "editor::PreviousInlineCompletion",
+      "ctrl-n": "editor::NextInlineCompletion",
+      "ctrl-p": "editor::PreviousInlineCompletion",
+      "ctrl-l": "editor::AcceptInlineCompletion"
+    }
+  },
+  {
+    "context": "Editor && showing_code_actions",
+    "bindings": {
+      "ctrl-n": "editor::ContextMenuNext",
+      "ctrl-p": "editor::ContextMenuPrev",
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrev",
+      "ctrl-l": ["workspace.SendKeystrokes", "Enter"] // TODO: doesn't seem to work
+    }
+  },
+  {
+    "context": "Editor && showing_completions",
+    "bindings": {
+      "ctrl-j": "editor::ContextMenuNext",
+      "ctrl-k": "editor::ContextMenuPrev",
+      "ctrl-l": "editor::ConfirmCompletion"
+    }
+  },
+  {
+    "context": "FileFinder || TabSwitcher",
+    "bindings": {
+      "k": "menu::SelectPrev",
+      "j": "menu::SelectNext",
+      "l": "menu::Confirm",
+      "x": "tab_switcher::CloseSelectedItem",
+      "d": "tab_switcher::CloseSelectedItem"
+    }
+  },
+  {
+    "context": "Terminal",
+    "bindings": {
+      "cmd-t": "workspace::NewTerminal",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePrevItem"
+    }
+  },
+  {
+    "context": "Editor && VimControl && !menu",
+    "bindings": {
+      // key binds that work in vim normal & visual mode
+      "alt-j": "editor::MoveLineDown",
+      "alt-k": "editor::MoveLineUp",
+      "shift-l": "pane::ActivateNextItem",
+      "shift-h": "pane::ActivatePrevItem",
+      "] b": "pane::ActivateNextItem",
+      "[ b": "pane::ActivatePrevItem"
+    }
+  },
+  {
+    "context": "Editor && vim_mode == visual",
+    "bindings": {
+      // add surroundings using shift-s
+      "shift-s": [
+        "vim::PushOperator",
+        {
+          "AddSurrounds": {}
+        }
+      ]
+    }
+  }
+]

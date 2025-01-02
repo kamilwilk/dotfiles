@@ -1,0 +1,31 @@
+return {
+  {
+    "williamboman/mason.nvim",
+    opts = {
+      ensure_installed = {
+        "black",
+        "eslint-lsp",
+        "gofumpt",
+        "golangci-lint",
+        "gopls",
+        "isort",
+        "json-lsp",
+        "lua-language-server",
+        "prettierd",
+        "pyright",
+        "rubocop",
+        "ruff",
+        "shellcheck",
+        "shfmt",
+        "solargraph",
+        "standardrb",
+        "stylua",
+        "svelte-language-server",
+        "tailwindcss-language-server",
+        "terraform-ls",
+        "tflint",
+        "typescript-language-server",
+      },
+    },
+  },
+}

@@ -1,0 +1,96 @@
+################################################################################
+## config
+################################################################################
+
+# reduce timeout for ESC
+export KEYTIMEOUT=1
+# default editors
+export EDITOR="nvim"
+export VISUAL="nvim"
+export PAGER="bat -p"
+# -R sends control characters so it renders colours and bold and stuff.
+# -X avoids clearing the screen.
+export LESS='-RX --mouse --quit-if-one-screen'
+export GPG_TTY=$TTY
+export LANG="en_US.UTF-8"
+export XDG_CONFIG_HOME="$HOME/.config"
+# telemetry
+export DOTNET_CLI_TELEMETRY_OPTOUT=1
+export HOMEBREW_NO_ANALYTICS=1
+export POWERSHELL_TELEMETRY_OPTOUT=1
+# man
+export MANPATH="/usr/local/share/man:/usr/local/man:$MANPATH"
+# bash
+export BASH_SILENCE_DEPRECATION_WARNING=1
+
+################################################################################
+## aliases
+################################################################################
+alias k="kubectl"
+alias lg="lazygit"
+alias ta="tmux attach -t"
+alias tad="tmux attach -d -t"
+alias tksv="tmux kill-server"
+alias tkss="tmux kill-session -t"
+alias tl="tmux list-sessions"
+alias ts="tmux new-session -s"
+alias tf='terraform'
+alias vi="nvim"
+alias vim="nvim"
+
+################################################################################
+## tools
+################################################################################
+
+# 1password
+export SSH_AUTH_SOCK="$HOME/Library/Group Containers/2BUA8C4S2C.com.1password/t/agent.sock"
+
+# bun
+export BUN_INSTALL="$HOME/.bun"
+export PATH="$BUN_INSTALL/bin:$PATH"
+
+# fzf
+if [ -f ~/.fzf.bash ]; then
+  source ~/.fzf.bash
+fi
+
+# go
+export GOPATH="$HOME/.go"
+
+# local
+export PATH="$HOME/.local/bin:$PATH"
+
+# homebrew
+export PATH="/opt/homebrew/bin:/opt/homebrew/sbin:$PATH"
+if [ "$(arch)" = "arm64" ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv)"
+else
+  eval "$(/usr/local/bin/brew shellenv)"
+fi
+
+# make
+export PATH="$(brew --prefix)/opt/make/libexec/gnubin:$PATH"
+
+# OpenJDK
+export PATH="/opt/homebrew/opt/openjdk/bin:$PATH"
+
+# pnpm
+export PNPM_HOME="$HOME/Library/pnpm"
+export PATH="$PNPM_HOME:$PATH"
+
+# python rye
+[ -f "$HOME/.rye/env" ] && source "$HOME/.rye/env"
+
+# rancher
+export PATH="$HOME/.rd/bin:$PATH"
+
+################################################################################
+## private
+################################################################################
+source ~/.privaterc
+
+################################################################################
+## init
+################################################################################
+eval "$(zoxide init bash)"
+eval "$(starship init bash)"
